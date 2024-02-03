@@ -1,0 +1,12 @@
+# .gitpod.yml
+
+# Define the start script to run Maven
+vscode:
+  extensions:
+    - vscjava.vscode-java-pack
+
+# Install necessary tools and dependencies to run
+tasks:
+  - name: Install Dependencies & Run
+  - init: 'mvn clean test'
+    command: 'mvn clean test'
