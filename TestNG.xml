@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Selenium Test Suite" parallel="methods">
-    <test verbose="1" name="Simple Form Test">
+<suite name="Selenium 101 Test Suite" parallel="methods">
+    <test verbose="1" name="Lamda Test Selenium 101">
         <classes>
             <class name="testcases.SimpleFormTest"/>
-        </classes>
-    </test>
-    <test verbose="1" name="Slider Demo Test">
-        <classes>
             <class name="testcases.SliderDemoTest"/>
         </classes>
     </test>

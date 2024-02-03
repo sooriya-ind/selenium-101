@@ -49,20 +49,19 @@ public class Base {
         ltOptions.put("w3c", true);
         ltOptions.put("selenium_version", "4.17.0");
         ltOptions.put("version", "latest");
+        ltOptions.put("name", testName);
 
         if (browser.equalsIgnoreCase("Chrome")) {
             chromeOptions = new ChromeOptions();
             chromeOptions.setCapability("platformName", "Windows 10");
             chromeOptions.setCapability("browserName", "Chrome");
             chromeOptions.setCapability("LT:Options", ltOptions);
-            chromeOptions.setCapability("name", testName);
             driver = (new RemoteWebDriver(new URL("https://soori3123:1F1WcQdc7h0sLlrct4PPvyoanaZA0HwyNckp3NSGYam1K65ZYg@hub.lambdatest.com/wd/hub"),chromeOptions));
         } else {
             edgeOptions = new EdgeOptions();
             edgeOptions.setCapability("platformName", "Linux");
             edgeOptions.setCapability("browserName", "Microsoft Edge");
             edgeOptions.setCapability("LT:Options", ltOptions);
-            edgeOptions.setCapability("name", testName);
             driver = (new RemoteWebDriver(new URL("https://soori3123:1F1WcQdc7h0sLlrct4PPvyoanaZA0HwyNckp3NSGYam1K65ZYg@hub.lambdatest.com/wd/hub"),edgeOptions));
         }
 
