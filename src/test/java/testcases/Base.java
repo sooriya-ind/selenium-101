@@ -43,7 +43,7 @@ public class Base {
         ltOptions.put("visual", true);
         ltOptions.put("video", true);
         ltOptions.put("network", true);
-        ltOptions.put("build", "Selenium 101 Certification");
+        ltOptions.put("build", "LamdaTest Selenium 101 Certification");
         ltOptions.put("project", "LamdaTest Playground");
         ltOptions.put("console", "true");
         ltOptions.put("w3c", true);

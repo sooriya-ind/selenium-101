@@ -5,11 +5,16 @@
 vscode:
   extensions:
     - vscjava.vscode-java-pack
-
     - redhat.fabric8-analytics
 
 # Install necessary tools and dependencies to run
 tasks:
-  - name: Install Dependencies & Run
-  - init: 'mvn clean test'
-    command: 'mvn clean test'
+  - init: |
+      echo "export TERM=xterm" >> $HOME/.bashrc
+      echo "export JAVA_TOOL_OPTIONS=" >> $HOME/.bashrc
+    command: mvn clean test
+
+jetbrains:
+    intellij:
+        prebuilds:
+            version: stable
