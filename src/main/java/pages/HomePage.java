@@ -14,6 +14,9 @@ public class HomePage extends BaseUtils{
     @FindBy(xpath = "//a[text()='Simple Form Demo']")
     WebElement lnkSimpleFormDemo;
 
+    @FindBy(xpath = "//a[text()='Drag & Drop Sliders']")
+    WebElement lnkDragAndDropSliders;
+
     public HomePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver,this);
@@ -26,6 +29,11 @@ public class HomePage extends BaseUtils{
     public void goToSimpleFormDemoPage() {
         waitToBeClickable(driver, lnkSimpleFormDemo);
         lnkSimpleFormDemo.click();
+    }
+
+    public void goToSliderDemoPage() {
+        waitToBeClickable(driver, lnkDragAndDropSliders);
+        lnkDragAndDropSliders.click();
     }
 
 }

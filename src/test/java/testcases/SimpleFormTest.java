@@ -1,7 +1,5 @@
 package testcases;
 
-import java.net.MalformedURLException;
-
 import org.testng.annotations.Test;
 
 import pages.*;
@@ -9,10 +7,10 @@ import pages.*;
 public class SimpleFormTest extends Base {
 
     @Test
-    public void simpleFormTest() throws MalformedURLException{
+    public void simpleFormTest() {
 
         // Set driver
-        setDriver("Chrome");
+        setDriver("Chrome","Test Scenario 1 : Simple Form Demo");
 
         // Go to home page
         HomePage homepage = new HomePage(getDriver());
@@ -26,5 +24,5 @@ public class SimpleFormTest extends Base {
         simpleFormDemoPage.validateSimpleForm();
 
     }
-    
+
 }

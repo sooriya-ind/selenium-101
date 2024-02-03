@@ -7,10 +7,10 @@ import java.util.logging.Logger;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ThreadGuard;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterMethod;
 
 public class Base {
     
@@ -23,19 +23,19 @@ public class Base {
         return driverThreadLocal.get();
     }
 
-    public static synchronized void setDriver(String browser) {
+    public static synchronized void setDriver(String browser,String testName) {
         try {
-            driverThreadLocal.set(ThreadGuard.protect(initializer(browser)));            
+            driverThreadLocal.set(ThreadGuard.protect(initializer(browser,testName)));            
         } catch (MalformedURLException e) {
             log.warning(" Error in Creating Driver --> "+ e.getMessage());
         }
     }
 
-    private static WebDriver initializer(String browser) throws MalformedURLException {
+    private static WebDriver initializer(String browser,String testName) throws MalformedURLException {
         
         WebDriver driver;
         ChromeOptions chromeOptions;
-        SafariOptions safariOptions;
+        EdgeOptions edgeOptions;
 
         HashMap<String, Object> ltOptions = new HashMap<String, Object>();
         ltOptions.put("username", "soori3123");
@@ -46,29 +46,31 @@ public class Base {
         ltOptions.put("build", "Selenium 101 Certification");
         ltOptions.put("project", "LamdaTest Playground");
         ltOptions.put("console", "true");
-        ltOptions.put("selenium_version", "4.17.0");
         ltOptions.put("w3c", true);
+        ltOptions.put("selenium_version", "4.17.0");
         ltOptions.put("version", "latest");
 
         if (browser.equalsIgnoreCase("Chrome")) {
             chromeOptions = new ChromeOptions();
-            chromeOptions.setPlatformName("Windows 10");
-            ltOptions.put("browserName", "Chrome");
+            chromeOptions.setCapability("platformName", "Windows 10");
+            chromeOptions.setCapability("browserName", "Chrome");
             chromeOptions.setCapability("LT:Options", ltOptions);
+            chromeOptions.setCapability("name", testName);
             driver = (new RemoteWebDriver(new URL("https://soori3123:1F1WcQdc7h0sLlrct4PPvyoanaZA0HwyNckp3NSGYam1K65ZYg@hub.lambdatest.com/wd/hub"),chromeOptions));
         } else {
-            safariOptions = new SafariOptions();
-            safariOptions.setPlatformName("Catalina");
-            ltOptions.put("browserName", "Firefox");
-            safariOptions.setCapability("LT:Options", ltOptions);
-            driver = (new RemoteWebDriver(new URL("https://soori3123:1F1WcQdc7h0sLlrct4PPvyoanaZA0HwyNckp3NSGYam1K65ZYg@hub.lambdatest.com/wd/hub"),safariOptions));
+            edgeOptions = new EdgeOptions();
+            edgeOptions.setCapability("platformName", "Linux");
+            edgeOptions.setCapability("browserName", "Microsoft Edge");
+            edgeOptions.setCapability("LT:Options", ltOptions);
+            edgeOptions.setCapability("name", testName);
+            driver = (new RemoteWebDriver(new URL("https://soori3123:1F1WcQdc7h0sLlrct4PPvyoanaZA0HwyNckp3NSGYam1K65ZYg@hub.lambdatest.com/wd/hub"),edgeOptions));
         }
 
         return driver;
     }
 
-    @AfterTest
-    public void tearDown() {
+    @AfterMethod
+    protected synchronized void tearDown() {
         
         // Quit Driver & Remove Thread Local
         getDriver().quit();

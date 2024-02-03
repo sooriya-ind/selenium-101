@@ -31,7 +31,7 @@ public class SimpleFormDemoPage extends BaseUtils {
         String msg = "Welcome to LambdaTest";
 
         // Wait untill fields get displayed
-        waitToBeVisible(driver, txtPleaseEnterYourMsg);
+        waitToBeVisible(driver, btnGetCheckedValue);
 
         // Validate url contains “simple-form-demo”.
         assert driver.getCurrentUrl().contains("simple-form-demo") == true;
